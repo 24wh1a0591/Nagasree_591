@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body style="background:#eef2f7;">
+
+<div class="header text-white text-center p-3" style="background:#2c3e50;">
+  E-TICKETING SYSTEM
+</div>
+
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow w-100" style="max-width:500px;">
+    <h4>Create Account</h4>
+
+    <div class="row">
+      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Name"></div>
+      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Username"></div>
+      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Email"></div>
+      <div class="col-md-6 mb-2"><input type="date" class="form-control"></div>
+      <div class="col-md-6 mb-2"><input type="password" class="form-control" placeholder="Password"></div>
+      <div class="col-md-6 mb-2"><input type="password" class="form-control" placeholder="Confirm Password"></div>
+    </div>
+
+    <div class="mb-2">
+      Gender:
+      <input type="radio"> Male
+      <input type="radio"> Female
+      <input type="radio"> Other
+    </div>
+
+    <button class="btn btn-primary w-100" onclick="register()">Register</button>
+
+    <p class="text-center mt-2">
+      Already have account? <a href="index.html">Login</a>
+    </p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
