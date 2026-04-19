@@ -1,47 +1,109 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Register</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+// LOGIN
+function login() {
+  let user = document.getElementById("loginUser").value.trim();
+  let pass = document.getElementById("loginPass").value.trim();
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+  if (user === "" || pass === "") {
+    alert("All fields required!");
+    return false;
+  }
 
-<body style="background:#eef2f7;">
+  if (pass.length < 6) {
+    alert("Password must be at least 6 characters!");
+    return false;
+  }
 
-<div class="header text-white text-center p-3" style="background:#2c3e50;">
-  E-TICKETING SYSTEM
-</div>
+  alert("Login Successful");
+  window.location = "catalog.html";
+  return false;
+}
 
-<div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card p-4 shadow w-100" style="max-width:500px;">
-    <h4>Create Account</h4>
+// REGISTER
+function register() {
+  let name = document.getElementById("name").value.trim();
+  let username = document.getElementById("username").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let dob = document.getElementById("dob").value;
+  let password = document.getElementById("password").value;
+  let confirmPassword = document.getElementById("confirmPassword").value;
+  let gender = document.querySelector('input[name="gender"]:checked');
 
-    <div class="row">
-      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Name"></div>
-      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Username"></div>
-      <div class="col-md-6 mb-2"><input class="form-control" placeholder="Email"></div>
-      <div class="col-md-6 mb-2"><input type="date" class="form-control"></div>
-      <div class="col-md-6 mb-2"><input type="password" class="form-control" placeholder="Password"></div>
-      <div class="col-md-6 mb-2"><input type="password" class="form-control" placeholder="Confirm Password"></div>
-    </div>
+  if (name === "") return alert("Enter name"), false;
+  if (username.length < 4) return alert("Username too short"), false;
 
-    <div class="mb-2">
-      Gender:
-      <input type="radio"> Male
-      <input type="radio"> Female
-      <input type="radio"> Other
-    </div>
+  let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  if (!email.match(pattern)) return alert("Invalid email"), false;
 
-    <button class="btn btn-primary w-100" onclick="register()">Register</button>
+  if (dob === "") return alert("Select DOB"), false;
+  if (password.length < 6) return alert("Weak password"), false;
+  if (password !== confirmPassword) return alert("Passwords not match"), false;
+  if (!gender) return alert("Select gender"), false;
 
-    <p class="text-center mt-2">
-      Already have account? <a href="index.html">Login</a>
-    </p>
-  </div>
-</div>
+  alert("Registered Successfully");
+  window.location = "index.html";
+  return false;
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+// LOGOUT
+function logout() {
+  alert("Logged out");
+  window.location = "index.html";
+}
 
+// CART
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function addToCart(name, price) {
+  let item = cart.find(i => i.name === name);
+
+  if (item) {
+    item.qty++;
+  } else {
+    cart.push({ name, price, qty: 1 });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert("Added to cart");
+}
+
+function loadCart() {
+  let table = document.getElementById("cartTable");
+  let total = 0;
+
+  cart.forEach((item, index) => {
+    let row = table.insertRow();
+
+    row.insertCell(0).innerText = item.name;
+    row.insertCell(1).innerText = item.qty;
+    row.insertCell(2).innerText = "$" + item.price;
+    row.insertCell(3).innerText = "$" + item.price * item.qty;
+
+    let btn = document.createElement("button");
+    btn.innerText = "Remove";
+    btn.className = "remove-btn";
+    btn.onclick = () => removeItem(index);
+
+    row.insertCell(4).appendChild(btn);
+
+    total += item.price * item.qty;
+  });
+
+  document.getElementById("total").innerText = "Total: $" + total;
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  localStorage.setItem("cart", JSON.stringify(cart));
+  location.reload();
+}
+
+function proceedToCheckout() {
+  if (cart.length === 0) {
+    alert("Cart empty!");
+    return;
+  }
+
+  alert("Order placed!");
+  localStorage.removeItem("cart");
+  window.location = "catalog.html";
+}

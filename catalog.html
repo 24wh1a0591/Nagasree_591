@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Catalog</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+  24WH1A0591_NagaSree - E-BOOK MANAGEMENT SYSTEM
+</div>
+
+<div class="layout">
+
+  <div class="sidebar">
+    <h3>Menu</h3>
+    <a href="catalog.html">Catalog</a>
+    <a href="cart.html">Cart</a>
+  </div>
+
+  <div class="main">
+    <button class="logout" onclick="logout()">Logout</button>
+
+    <h2>Available E-Books</h2>
+
+    <div class="books">
+
+      <div class="card">
+        <img src="book1.png" class="book-img">
+        <h3>Java Programming</h3>
+        <p>$299</p>
+        <button onclick="addToCart('Java Programming',299)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <img src="book2.png" class="book-img">
+        <h3>Python Programming</h3>
+        <p>$199</p>
+        <button onclick="addToCart('Python Programming',199)">Add to Cart</button>
+      </div>
+
+      <div class="card">
+        <img src="book3.png" class="book-img">
+        <h3>Full Stack Web Development</h3>
+        <p>$399</p>
+        <button onclick="addToCart('Full Stack Web Development',399)">Add to Cart</button>
+      </div>
+
+    </div>
+
+    <br>
+    <a href="cart.html" class="goto">Go to Cart</a>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
